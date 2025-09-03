@@ -17,7 +17,7 @@ def ai_suggest(task_text):
         priority = "Medium"
     else:
         priority = "Low"
-    # time estimate heuristics
+
     minutes = 10
     if any(w in text for w in ["read", "skim", "review"]):
         minutes = 20
@@ -25,7 +25,7 @@ def ai_suggest(task_text):
         minutes = 120
     if any(w in text for w in ["email", "reply", "call", "schedule"]):
         minutes = 15
-    # tags based on keywords
+
     tags = []
     keywords = {
         "email": ["email", "reply", "mail"],
@@ -42,12 +42,12 @@ def ai_suggest(task_text):
         tags = ["general"]
     return {"priority": priority, "est_minutes": minutes, "tags": tags}
 
-# Persistent tasks in session_state
+
 if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
-st.title("🧠 AI‑assisted To‑Do List (Local AI Helper)")
-st.write("A small Streamlit to-do app with a local, rule-based 'AI helper' that suggests priority, estimated time, and tags from the task description. No external APIs used.")
+st.title("🧠 AI‑assisted To‑Do List")
+st.write("A small Streamlit to-do app that suggests priority, estimated time, and tags from the task description.")
 
 with st.form("add_task", clear_on_submit=True):
     task = st.text_input("Task description")
